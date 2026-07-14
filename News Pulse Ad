@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+atOptions = {
+'key' : 'cd0af5e4a29da7635cbbc47a76cfded7',
+'format' : 'iframe',
+'height' : 50,
+'width' : 320,
+'params' : {}
+};
+</script>
+
+<script src="https://www.highperformanceformat.com/cd0af5e4a29da7635cbbc47a76cfded7/invoke.js"></script>
+
+</body>
+</html>
