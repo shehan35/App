@@ -1,24 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adsterra 300x250 Banner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Airport Search</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  margin: 0;
+}
+
+h3 {
+  text-align: center;
+}
+
+input {
+  width: 65%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+#result {
+  margin-top: 15px;
+}
+</style>
+
 </head>
 
-<body style="margin:0;display:flex;justify-content:center;align-items:center;height:100vh;">
+<body>
+
+<h3>Airport Search</h3>
+
+<input id="search" placeholder="Enter IATA code / Airport">
+<button onclick="searchAirport()">Search</button>
+
+<div id="result"></div>
+
 
 <script>
-  atOptions = {
-    'key' : 'fb9a3ab00acf266713c6b94bb7c5afa3',
-    'format' : 'iframe',
-    'height' : 250,
-    'width' : 300,
-    'params' : {}
-  };
-</script>
 
-<script src="https://www.highperformanceformat.com/fb9a3ab00acf266713c6b94bb7c5afa3/invoke.js"></script>
+function searchAirport(){
+
+var q = document.getElementById("search").value.trim();
+
+if(q == ""){
+document.getElementById("result").innerHTML = "Enter search text";
+return;
+}
+
+
+var oldScript = document.getElementById("jsonpScript");
+
+if(oldScript){
+oldScript.remove();
+}
+
+
+var script = document.createElement("script");
+
+script.id = "jsonpScript";
+
+script.src =
+"https://script.google.com/macros/s/AKfycby9yA4yUptHPRu6B-rj14f38wUONCkJTzgMpzMO-d4wdz2bcrHwMlCPqj37jKLaiOojAg/exec?search="
++ encodeURIComponent(q)
++ "&callback=showResults";
+
+
+document.body.appendChild(script);
+
+}
+
+
+
+function showResults(data){
+
+var output = "";
+
+
+if(data.length == 0){
+
+output = "No airport found";
+
+}
+
+else {
+
+data.forEach(function(a){
+
+output +=
+"<b>IATA Code:</b> " + a.code + "<br>" +
+"<b>Airport:</b> " + a.airport + "<br>" +
+"<b>Location:</b> " + a.location + "<br>" +
+"<b>Country:</b> " + a.country +
+"<hr>";
+
+});
+
+}
+
+
+document.getElementById("result").innerHTML = output;
+
+}
+
+
+</script>
 
 </body>
 </html>
